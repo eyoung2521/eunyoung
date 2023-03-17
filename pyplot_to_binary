@@ -1,0 +1,17 @@
+'''이진형 변경 함수'''
+import bitstring
+import os
+import tempfile
+
+def _pyplot_to_binary(fig):
+  fig.set_canvas(plt.gcf().canvas)
+  file=tempfile.NamedTemporaryFile(delete=False)
+  fig.savefig(file)
+  file.close()
+  reture _image_file_to_binary(file)
+  
+def _image_file_to_binary(file):
+  bits=bitstring.BitArray(filename=file.name)
+  img=bits.bytes
+  os.unlink(file.name)
+  return img
